@@ -17,11 +17,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const caracteres = 250;
+  const caracteres = 250; //Limita a quantidade caracteres até 250
 
-  const caracteresRestantes = caracteres - textoEntrada.length;
+  const caracteresRestantes = caracteres - textoEntrada.length;  //Calcula a quantidade de caracteres que restam
 
-  const handleTraducao = async () => {
+  const handleTraducao = async () => {  
     if (textoEntrada.length === 0) {
       setError("O campo de texto não pode estar vazio");
       return;
@@ -31,7 +31,7 @@ function App() {
     setError('');
     setTraduzirTexto('');
 
-    try {
+    try {  //Faz a chamada da API
       const response = await fetch(
         `https://api.mymemory.translated.net/get?q=${encodeURIComponent(textoEntrada)}&langpair=${idiomaOrigem}|${idiomaDestino}`
       );
@@ -64,8 +64,8 @@ return (
           <select
             className="text-sm text-textColor bg-transparent border-none focus:outline-none cursor-pointer"
             value={idiomaOrigem}
-            onChange={(e) => setIdiomaOrigem(e.target.value)}
-          >
+            onChange={(e) => setIdiomaOrigem(e.target.value)} //Seleciona o idioma de origem para tradução
+          >   
             {languages.map((lang) => (
               <option key={lang.code} value={lang.code}>{lang.name}</option>
             ))}
@@ -91,7 +91,7 @@ return (
           <select
             className="text-sm text-textColor bg-transparent border-none focus:outline-none cursor-pointer"
             value={idiomaDestino}
-            onChange={(e) => setIdiomaDestino(e.target.value)}
+            onChange={(e) => setIdiomaDestino(e.target.value)} //Seleciona o idioma para qual o texto deve ser traduzido
           >
             {languages.map((lang) => (
               <option key={lang.code} value={lang.code}>{lang.name}</option>
